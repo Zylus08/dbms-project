@@ -4,7 +4,10 @@ const db = require('./db');
 require('dotenv').config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "https://dbms-project-est.vercel.app/",
+  credentials: true
+}));
 app.use(express.json());
 
 // --- AUTHENTICATION ROUTES ---
