@@ -13,8 +13,8 @@ function App() {
   const fetchData = async () => {
     try {
       const [lostRes, foundRes] = await Promise.all([
-        axios.get('${API_BASE_URL}/api/lost-items'),
-        axios.get('{API_BASE_URL}/api/found-items')
+        axios.get(`${API_BASE_URL}/api/lost-items`),
+        axios.get(`${API_BASE_URL}/api/found-items`)
       ]);
       setLostItems(lostRes.data);
       setFoundItems(foundRes.data);
