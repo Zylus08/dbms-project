@@ -232,8 +232,8 @@ function App() {
         <div>
           <h4>Contact</h4>
           <ul>
-            <li>Tel: +94 716520690</li>
-            <li>Email: talkprojects@wrenix.com</li>
+            <li>Tel: +91 7290931767</li>
+            <li>Email: smishra2_be24@thapar.edu, akumar_be24@thapar.edu, agulalia_be24@thapar.edu</li>
             <li style={{marginTop: '1rem'}}>🐦 📘 📸 🐱</li>
           </ul>
         </div>
