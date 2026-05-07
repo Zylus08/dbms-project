@@ -8,6 +8,12 @@ app.use(cors());
 app.use(express.json());
 
 // --- AUTHENTICATION ROUTES ---
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "API working properly"
+  });
+});
 // Login Route
 app.post('/api/login', async (req, res) => {
     try {
