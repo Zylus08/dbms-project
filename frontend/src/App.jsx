@@ -4,6 +4,7 @@ import { PackageX, Search, LogOut } from 'lucide-react';
 import './App.css';
 
 function App() {
+  const API_BASE_URL = import.meta.env.VITE_API_URL;
   const [activeTab, setActiveTab] = useState('home');
   const [lostItems, setLostItems] = useState([]);
   const [foundItems, setFoundItems] = useState([]);
@@ -12,8 +13,8 @@ function App() {
   const fetchData = async () => {
     try {
       const [lostRes, foundRes] = await Promise.all([
-        axios.get('http://localhost:5001/api/lost-items'),
-        axios.get('http://localhost:5001/api/found-items')
+        axios.get('${API_BASE_URL}/api/lost-items'),
+        axios.get('{API_BASE_URL}/api/found-items')
       ]);
       setLostItems(lostRes.data);
       setFoundItems(foundRes.data);
@@ -147,7 +148,7 @@ function App() {
                       <button 
                         onClick={async () => {
                           if(window.confirm('Delete this lost item?')) {
-                            await axios.delete(`http://localhost:5001/api/lost-items/${item.lost_id}`);
+                            await axios.delete(`${API_BASE_URL}/api/lost-items/${item.lost_id}`);
                             fetchData();
                           }
                         }} 
@@ -178,7 +179,7 @@ function App() {
                       <button 
                         onClick={async () => {
                           if(window.confirm('Delete this found item?')) {
-                            await axios.delete(`http://localhost:5001/api/found-items/${item.found_id}`);
+                            await axios.delete(`${API_BASE_URL}/api/found-items/${item.found_id}`);
                             fetchData();
                           }
                         }} 
@@ -257,7 +258,7 @@ function AuthPanel({ onAuthSuccess }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const endpoint = mode === 'login' ? 'http://localhost:5001/api/login' : 'http://localhost:5001/api/signup';
+      const endpoint = mode === 'login' ? `${API_BASE_URL}/api/login` : `${API_BASE_URL}/api/signup`;
       const payload = mode === 'login' ? { username, password } : { username, password, phone, role };
       const res = await axios.post(endpoint, payload);
       onAuthSuccess(res.data.user);
@@ -336,7 +337,7 @@ function ReportForm({ type, user, onSuccess }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const endpoint = isLost ? 'http://localhost:5001/api/lost-items' : 'http://localhost:5001/api/found-items';
+    const endpoint = isLost ? `${API_BASE_URL}/api/lost-items` : `${API_BASE_URL}/api/found-items`;
     const payload = {
       user_id: user.user_id, // Link to auth user
       item_name: formData.item_name, category: formData.category, description: formData.description,
